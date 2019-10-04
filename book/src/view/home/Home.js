@@ -5,20 +5,45 @@ import {
     View,
     TextInput,
     PixelRatio,
+    ScrollView,
+    Image,
+    RefreshControl,
     Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; //引入图标
 const {width, height} = Dimensions.get('window');
 import px2dp from '../../utils/px2dp';
-import Button from '../../components/Button';
-import TextButton from '../../components/TextButton';
+import SWiper from 'react-native-swiper';
+import SearchBar from '../../components/SearchBar';
+import CardView from '../../components/SimpleCardView';
+import ImageButton from '../../components/ImageButtonWithText';
+const bannerImages = [
+    require('../../images/banner/banner1.jpg'),
+    require('../../images/banner/banner2.png')
+];
+
+const imgBtnImages = [
+    require('../../images/hot.png'),
+    require('../../images/hot.png'),
+    require('../../images/hot.png'),
+    require('../../images/hot.png'),
+    require('../../images/hot.png'),
+];
+
+
 
 type props = {}
 
 export default class Home extends Component<props> {
-    constructor(props) {
+    constructor(props){
         super(props);
-        this.state = {name: '', password: ''};
+        this.state = {
+            refreshing: true,
+            loadedData: false,
+            dataBlob: [{title:'我是title',collectionCount:10,user:'我是title',time:'我是title',url:'我是title',commentsCount:'我是title',viewsCount:'我是title',screenshot:'我是title'}],
+            btnName: ['所有分类','文学艺术','人文科学','经济管理','生活休闲'],
+            btnName2: ['外语学习','自然科学','考试教育','计算机','医学']
+        }
     }
 
     _handleBack() {
@@ -39,46 +64,56 @@ export default class Home extends Component<props> {
         });
     }
 
+    _imageButtonCallback(position){
+        this._alert();
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.editGroup}>
-                    <View style={styles.editView1}>
-                        <TextInput
-                            style={styles.edit}
-                            placeholder='请输入用户名'
-                            underlineColorAndroid={'transparent'}
-                            numberOfLines={1}
-                            keyboardType={'numeric'}
-                            placeholderTextColor="#c4c4c4"
-                            autoFocus={true}
-                            onChangeText={(name) => this.setState({name})}/>
-
+                <SearchBar/>
+                <ScrollView>
+                    <SWiper
+                        height={px2dp(130)}
+                        autoplay={true}
+                        bounces={true}>
+                        <View style={styles.slide}>
+                            <Image style={styles.image} source={bannerImages[0]} resizeMode="stretch"/>
+                        </View>
+                        <View style={styles.slide}>
+                            <Image style={styles.image} source={bannerImages[1]} resizeMode="stretch"/>
+                        </View>
+                    </SWiper>
+                    <View style={styles.imageBtnLine}>
+                        {this.state.btnName.map((item, index) => {
+                            return(
+                                <ImageButton
+                                    key={index}
+                                    image={imgBtnImages[index]}
+                                    imgSize={px2dp(35)}
+                                    text={item}
+                                    color="#000"
+                                    btnStyle={styles.imgBtn}
+                                    onPress={this._imageButtonCallback.bind(this, index)}/>
+                            )})
+                        }
                     </View>
-                    <View style={styles.styleLine}/>
-                    <View style={styles.editView1}>
-                        <TextInput
-                            style={styles.edit}
-                            placeholder='请输入密码'
-                            underlineColorAndroid={'transparent'}
-                            numberOfLines={1}
-                            keyboardType={'numeric'}
-                            placeholderTextColor="#c4c4c4"
-                            autoFocus={true}
-                            onChangeText={(name) => this.setState({name})}/>
-
+                    <View style={styles.imageBtnLine}>
+                        {this.state.btnName2.map((item, index) => {
+                            return(
+                                <ImageButton
+                                    key={index}
+                                    image={imgBtnImages[index]}
+                                    imgSize={px2dp(35)}
+                                    text={item}
+                                    color="#000"
+                                    btnStyle={styles.imgBtn}
+                                    onPress={this._imageButtonCallback.bind(this, index)}/>
+                            )})
+                        }
                     </View>
-
-                    <View style={{marginTop: px2dp(10), height: px2dp(40)}}>
-                        <Button text="登录" onPress={this._handleBack.bind(this)}/>
-                    </View>
-                    <View style={styles.textButtonLine}>
-                        <TextButton text="忘记密码?" onPress={this._forgetPassword.bind(this)} color="rgba(255,255,255,0.5)"/>
-                        <TextButton text="注册账号" onPress={this._signupCallback.bind(this)}/>
-                    </View>
-                </View>
-
+                    <CardView isRenderHeader={true} contents={this.state.dataBlob}/>
+                </ScrollView>
             </View>
         );
     }
@@ -87,50 +122,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e8e8e8',
-        justifyContent:'center',
-        alignContent:'center'
     },
-    styleLine: {
-        height: 1 / PixelRatio.get(),
-        backgroundColor: '#c4c4c4'
+    image: {
+        height: px2dp(130),
+        width: Dimensions.get('window').width
     },
-    edit: {
-        height: px2dp(40),
-        fontSize: px2dp(13),
+    imageBtnLine:{
+        flexDirection: 'row',
         backgroundColor: '#fff',
-        paddingLeft: px2dp(15),
-        paddingRight: px2dp(15)
+        alignItems: 'center',
+        borderBottomWidth: 1/PixelRatio.get(),
+        borderBottomColor: '#c4c4c4'
     },
-    stylePassContainer: {
-        backgroundColor: '#ffffff',
-        height: 40,
-        width: width,
-        paddingLeft: 20,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+    imgBtn: {
+        height: px2dp(80),
+        width: Dimensions.get('window').width/5,
     },
-    stylePassWord: {
-        backgroundColor: '#ffffff',
-        height: 40,
-        width: width,
-        textAlign: 'left',
-        paddingLeft: 10
-    },
-
-    editGroup: {
-        margin: px2dp(20)
-    },
-    editView1: {
-        height: px2dp(48),
-        backgroundColor: 'white',
+    header:{
+        backgroundColor: '#fff',
+        height: px2dp(40),
         justifyContent: 'center',
-        borderTopLeftRadius: 3,
-        borderTopRightRadius: 3
-    },
-
-    textButtonLine:{
-        marginTop: px2dp(12),
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
+        paddingLeft: px2dp(15),
+    }
 });

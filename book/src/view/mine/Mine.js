@@ -16,6 +16,7 @@ import theme from '../../config/theme';
 import Items from '../../components/Items';
 import Avatar from '../../components/Avatar';
 import TextButton from '../../components/TextButton';
+import Button from '../../components/Button';
 import px2dp from '../../utils/px2dp';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -51,53 +52,48 @@ export default class Home extends Component<props> {
                         <TouchableNativeFeedback onPress={this._onPressCallback.bind(this, 0)}>
                             <View style={styles.intro}>
                                 <Avatar image={require('../../images/logo.png')} size={px2dp(55)} textSize={px2dp(20)}/>
-                                <View style={{marginLeft: px2dp(12)}}>
-                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>React_Native</Text>
-                                    <TextButton text="添加职位 @添加公司"
-                                        color="#949494"
-                                        fontSize={px2dp(13)}
-                                        onPress={this._onPressCallback.bind(this, 1)}/>
+                                <View>
+                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>Kira</Text>
                                 </View>
-                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
-                                    <Icon name="ios-arrow-forward" color="#ccc" size={px2dp(30)}/>
-                                </View>
+                                <Button text="签到积分"
+                                    color="#949494"
+                                    fontSize={px2dp(12)}
+                                    onPress={this._onPressCallback.bind(this, 1)}/>
                             </View>
                         </TouchableNativeFeedback>
                         :
                         <TouchableOpacity onPress={this._onPressCallback.bind(this, 0)}>
                             <View style={styles.intro}>
                                 <Avatar image={require('../../images/logo.png')} size={px2dp(55)} textSize={px2dp(20)}/>
-                                <View style={{marginLeft: px2dp(12)}}>
-                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>React_Native</Text>
-                                    <TextButton text="添加职位 @添加公司"
-                                        color="#949494"
-                                        fontSize={px2dp(13)}
-                                        onPress={this._onPressCallback.bind(this, 1)}/>
+                                <View style={{marginLeft: px2dp(14)}}>
+                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>Kira</Text>
                                 </View>
-                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
-                                    <Icon name="ios-arrow-forward" color="#ccc" size={px2dp(30)}/>
-                                </View>
+                                <Button text="签到积分"
+                                    color="#949494"
+                                    fontSize={px2dp(12)}
+                                    onPress={this._onPressCallback.bind(this, 1)}/>
                             </View>
                         </TouchableOpacity>
                     }
                     <View style={styles.list}>
                         <Items icon="md-heart"
-                            text="我的收藏"
+                            text="我的通知"
                             subText="15篇"
                             iconColor="#32cd32"
                             onPress={this._onPressCallback.bind(this, 2)}/>
-                        <Items icon="md-eye" text="阅读过的文章" subText="15篇" onPress={this._onPressCallback.bind(this, 3)}/>
-                        <Items icon="md-pricetag" text="标签管理" subText="9个" onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-eye" text="付费会员" subText="今日优惠》" onPress={this._onPressCallback.bind(this, 3)}/>
                     </View>
 
                     <View style={styles.list}>
+                        <Items icon="md-pricetag" text="我的关注" subText="》" onPress={this._onPressCallback.bind(this, 4)}/>
                         <Items icon="md-heart"
                             text="我的收藏"
-                            subText="15篇"
+                            subText="》"
                             iconColor="#32cd32"
                             onPress={this._onPressCallback.bind(this, 2)}/>
-                        <Items icon="md-eye" text="阅读过的文章" subText="15篇" onPress={this._onPressCallback.bind(this, 3)}/>
-                        <Items icon="md-pricetag" text="标签管理" subText="9个" onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-eye" text="浏览历史" subText="》" onPress={this._onPressCallback.bind(this, 3)}/>
+                        <Items icon="md-pricetag" text="漫画商城" subText="今日推荐》" onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-pricetag" text="快看卡片" subText="新品发布》" onPress={this._onPressCallback.bind(this, 4)}/>
                     </View>
                 </ScrollView>
             </View>
@@ -128,8 +124,8 @@ const styles = StyleSheet.create({
         marginTop: px2dp(15)
     },
     intro: {
-        height: px2dp(100),
-        flexDirection: 'row',
+        height: px2dp(160),
+        flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
         padding: px2dp(20),
