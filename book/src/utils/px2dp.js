@@ -15,3 +15,4 @@ export default function px2dp(uiElementPx) {
     //console.log(deviceHeightDp);
     return uiElementPx *  deviceHeightDp / uiHeightPx;
 }
+

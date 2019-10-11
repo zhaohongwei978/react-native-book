@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         height: px2dp(33),
         paddingLeft: px2dp(13),
         paddingRight: px2dp(13),
-        backgroundColor: '#489efc',
+        backgroundColor: theme.actionBar.backgroundColor,
         alignItems: 'center',
         marginRight: px2dp(8),
         marginLeft: px2dp(8),

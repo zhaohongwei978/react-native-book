@@ -5,11 +5,11 @@ import {
     View,
     Image
 } from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
+import HomeFragment from '../view/home/Home';
+import BookFragment from '../view/book/Book';
+import MineFragment from '../view/mine/Mine';
 
-import Home from './home/Home';
-import Book from './book/Book';
-import Mine from './mine/Mine';
+import TabNavigator from 'react-native-tab-navigator';
 
 const dataSource = [
     {
@@ -17,48 +17,54 @@ const dataSource = [
         selectedIcon: require('./../images/icon/home_select.png'),
         tabPage: 'Home',
         tabName: '首页',
-        component:Home,
+        component: HomeFragment,
     },
     {
         icon: require('../images/icon/book.png'),
         selectedIcon: require('../images/icon/book_select.png'),
         tabPage: 'Book',
         tabName: '图书',
-        component:Book,
+        component: BookFragment,
     },
     {
         icon: require('../images/icon/map.png'),
         selectedIcon: require('../images/icon/map_select.png'),
         tabPage: 'Owner',
         tabName: '我的',
-        component:Mine,
+        component: MineFragment,
     }];
-var navigation = null;
+let navigation = null;
 type Props = {};
-export default class Root extends Component<Props> {
-
-    constructor(props){
+export default class TabBar extends Component<Props> {
+    constructor(props) {
         super(props);
-        navigation = this.props.navigation;
+
+        navigation = this.props.navigator;
         this.state = {
-            selectedTab:'Home'
-        }
+            selectedTab: 'Home'
+        };
     }
+
+    componentDidMount() {
+    }
+
 
     render() {
         let tabViews = dataSource.map((item, i) => {
             return (
                 <TabNavigator.Item
                     title={item.tabName}
-                    selected={this.state.selectedTab===item.tabPage}
-                    titleStyle={{color:'black'}}
-                    selectedTitleStyle={{color:'#7A16BD'}}
+                    selected={this.state.selectedTab === item.tabPage}
+                    titleStyle={{color: 'black'}}
+                    selectedTitleStyle={{color: '#7A16BD'}}
                     renderIcon={() => <Image style={styles.tabIcon} source={item.icon}/>}
-                    renderSelectedIcon = {() => <Image style={styles.tabIcon} source={item.selectedIcon}/>}
-                    onPress = {() => {this.setState({selectedTab:item.tabPage})}}
+                    renderSelectedIcon={() => <Image style={styles.tabIcon} source={item.selectedIcon}/>}
+                    onPress={() => {
+                        this.setState({selectedTab: item.tabPage});
+                    }}
                     key={i}
                 >
-                    <item.component  navigation={navigation}/>
+                    <item.component navigator={this.props.navigator}/>
                 </TabNavigator.Item>
             );
         });
@@ -80,8 +86,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F5FCFF',
     },
-    tabIcon:{
-        width:23,
-        height:23,
+    tabIcon: {
+        width: 23,
+        height: 23,
     }
 });

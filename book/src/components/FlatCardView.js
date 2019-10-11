@@ -11,9 +11,12 @@ import {
     TouchableNativeFeedback,
     Image, Dimensions
 } from 'react-native';
+
 const {width, height} = Dimensions.get('window');
 const itemHight = 200;
 import theme from '../config/theme';
+import Login from '../view/login/Login';
+import WebViewPage from '../view/WebViewPage';
 export default class FlatCardView extends Component {
     constructor(props) {
         super(props);
@@ -26,11 +29,19 @@ export default class FlatCardView extends Component {
         };
     }
 
+    _onPressCallback(rowData) {
+        console.log('--这里',rowData)
+        this.props.navigator.push({
+            component: WebViewPage,
+            args: {rowData: rowData}
+        });
+    }
+
     _renderItemView(item) {
 
         if (Platform.OS == 'ios') {
             return (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this._onPressCallback.bind(this, item)}>
                     <View style={[styles.flatItem, {backgroundColor: this.state.MainColor}]}>
                         <Image
                             source={{uri: item.image}}
@@ -46,7 +57,7 @@ export default class FlatCardView extends Component {
             );
         } else {
             return (
-                <TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={this._onPressCallback.bind(this, item)}>
                     <View style={[styles.flatItem, {backgroundColor: this.state.MainColor}]}>
                         <Image
                             source={{uri: item.images}}
@@ -62,9 +73,11 @@ export default class FlatCardView extends Component {
             );
         }
     }
+
     _getItemLayout(data, index) {
-        return {length: itemHight,offset: itemHight*index,index}
+        return {length: itemHight, offset: itemHight * index, index};
     }
+
     render() {
         return (
             <FlatList
@@ -73,7 +86,7 @@ export default class FlatCardView extends Component {
                 renderItem={
                     ({item}) => this._renderItemView(item)
                 }
-                getItemLayout={(data,index)=> this._getItemLayout(data,index)}
+                getItemLayout={(data, index) => this._getItemLayout(data, index)}
                 showsVerticalScrollIndicator={false}
                 numColumns={3}
             />

@@ -7,7 +7,9 @@ import {
     Platform,
     ScrollView,
     TouchableNativeFeedback,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert,
+    AlertIOS
 } from 'react-native';
 import {
     ListItem,
@@ -17,7 +19,9 @@ import Items from '../../components/Items';
 import Avatar from '../../components/Avatar';
 import TextButton from '../../components/TextButton';
 import Button from '../../components/Button';
+import Login from '../../view/login/Login';
 import px2dp from '../../utils/px2dp';
+import {jumpPager} from '../../utils/Utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 type props = {}
@@ -25,7 +29,6 @@ type props = {}
 export default class Home extends Component<props> {
     constructor(props) {
         super(props);
-
     }
 
     renderItem = ({item}) => (
@@ -38,9 +41,42 @@ export default class Home extends Component<props> {
         />
     );
 
-    _onPressCallback(){
-
+    _onPressCallback() {
+        this._alert();
     }
+
+    _refresh = () => {
+        console.log('refresh');
+        alert('刷新哈!');
+    };
+
+    _alert() {
+        const that = this;
+        if (Platform.OS === 'android') {
+            Alert.alert(
+                'Message',
+                '请先登录',
+                [{
+                    text: '去登录', onPress: () => {
+                        that.props.navigator.push({
+                            component: Login,
+                        });
+                    }
+                }]
+            );
+        } else if (Platform.OS === 'ios') {
+            AlertIOS.alert(
+                'Message',
+                '请先登录',
+                [{
+                    text: '去登录', onPress: () => {
+                        jumpPager(that.props.navigation.navigate, '/Login');
+                    }
+                }]
+            );
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -85,15 +121,24 @@ export default class Home extends Component<props> {
                     </View>
 
                     <View style={styles.list}>
-                        <Items icon="md-pricetag" text="我的关注" subText="》" onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-pricetag"
+                            text="我的关注"
+                            subText="》"
+                            onPress={this._onPressCallback.bind(this, 4)}/>
                         <Items icon="md-heart"
                             text="我的收藏"
                             subText="》"
                             iconColor="#32cd32"
                             onPress={this._onPressCallback.bind(this, 2)}/>
                         <Items icon="md-eye" text="浏览历史" subText="》" onPress={this._onPressCallback.bind(this, 3)}/>
-                        <Items icon="md-pricetag" text="漫画商城" subText="今日推荐》" onPress={this._onPressCallback.bind(this, 4)}/>
-                        <Items icon="md-pricetag" text="快看卡片" subText="新品发布》" onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-pricetag"
+                            text="漫画商城"
+                            subText="今日推荐》"
+                            onPress={this._onPressCallback.bind(this, 4)}/>
+                        <Items icon="md-pricetag"
+                            text="快看卡片"
+                            subText="新品发布》"
+                            onPress={this._onPressCallback.bind(this, 4)}/>
                     </View>
                 </ScrollView>
             </View>
@@ -129,8 +174,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         padding: px2dp(20),
-        borderTopWidth: 1/PixelRatio.get(),
-        borderBottomWidth: 1/PixelRatio.get(),
+        borderTopWidth: 1 / PixelRatio.get(),
+        borderBottomWidth: 1 / PixelRatio.get(),
         borderBottomColor: '#c4c4c4',
         borderTopColor: '#e4e4e4',
         marginTop: px2dp(10)

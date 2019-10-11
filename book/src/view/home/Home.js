@@ -19,47 +19,63 @@ import FlatCardView from '../../components/FlatCardView';
 import ImageButton from '../../components/ImageButtonWithText';
 
 const bannerImages = [
-    require('../../images/banner/banner1.jpg'),
-    require('../../images/banner/banner2.png')
+    require('../../images/banner/banner01.jpg'),
+    require('../../images/banner/banner02.jpg')
 ];
 
 const imgBtnImages = [
-    require('../../images/hot.png'),
-    require('../../images/hot.png'),
-    require('../../images/hot.png'),
-    require('../../images/hot.png'),
-    require('../../images/hot.png'),
+    require('../../images/tabs/01.png'),
+    require('../../images/tabs/02.png'),
+    require('../../images/tabs/03.png'),
+    require('../../images/tabs/04.png'),
+    require('../../images/tabs/05.png'),
+];
+
+const imgBtnImages2 = [
+    require('../../images/tabs/06.png'),
+    require('../../images/tabs/07.png'),
+    require('../../images/tabs/08.png'),
+    require('../../images/tabs/09.png'),
+    require('../../images/tabs/10.png'),
 ];
 
 const bookSource =
     [
         {
-            title: '坏蛋传',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969860&di=4758ac83d1703ef09373b4ec84932a3c&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F520f46ebb0180fab7eaad1478d15d790974bebbb2eb87-be2cmy_fw658'
+            title: '洪荒力',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/1011940368/300',
+            url:'https://m.qidian.com/book/1011940368'
         },
         {
-            title: '嫦娥奔月',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969859&di=e94b91302eca3cfc07db391f15bd1f08&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F250c8130c68c4f419872f6a28862a47355aae31612ad9-4ucAKr_fw658'
+            title: '沧元图',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/1015499829/300',
+            url:'https://m.qidian.com/book/1015499829'
         },
         {
-            title: '轩辕剑',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570861779&di=90e0b541c9c8c2953fcab01471526762&imgtype=jpg&er=1&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201605%2F14%2F20160514105753_A4xXm.thumb.700_0.jpeg'
+            title: '修真四万年',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/3439785/300',
+            url:'https://m.qidian.com/book/3439785'
         },
         {
-            title: '坏蛋传',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969860&di=4758ac83d1703ef09373b4ec84932a3c&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F520f46ebb0180fab7eaad1478d15d790974bebbb2eb87-be2cmy_fw658'
+            title: '最强弃少',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/2248950/300',
+            url:'https://m.qidian.com/book/2248950'
+
         },
         {
-            title: '嫦娥奔月',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969859&di=e94b91302eca3cfc07db391f15bd1f08&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F250c8130c68c4f419872f6a28862a47355aae31612ad9-4ucAKr_fw658'
+            title: '策行三国',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/1006276401/300',
+            url:'https://bookcover.yuewen.com/qdbimg/349573/1006276401/300'
         },
         {
-            title: '坏蛋传',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969860&di=4758ac83d1703ef09373b4ec84932a3c&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F520f46ebb0180fab7eaad1478d15d790974bebbb2eb87-be2cmy_fw658'
+            title: '开局上帝视角',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/1016340607/300',
+            url:'https://m.qidian.com/book/1016340607'
         },
         {
-            title: '嫦娥奔月',
-            images: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570266969859&di=e94b91302eca3cfc07db391f15bd1f08&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F250c8130c68c4f419872f6a28862a47355aae31612ad9-4ucAKr_fw658'
+            title: '我的女友是声优',
+            images: 'https://bookcover.yuewen.com/qdbimg/349573/1016094808/300',
+            url:'https://m.qidian.com/book/1016094808'
         },
     ];
 
@@ -143,7 +159,7 @@ export default class Home extends Component<props> {
                             return (
                                 <ImageButton
                                     key={index}
-                                    image={imgBtnImages[index]}
+                                    image={imgBtnImages2[index]}
                                     imgSize={px2dp(35)}
                                     text={item}
                                     color="#000"
@@ -153,7 +169,7 @@ export default class Home extends Component<props> {
                         })
                         }
                     </View>
-                    <FlatCardView content={bookSource}/>
+                    <FlatCardView content={bookSource} navigator={this.props.navigator}  />
                 </ScrollView>
             </View>
         );

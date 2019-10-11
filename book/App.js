@@ -1,8 +1,8 @@
 import React from 'react';
-import Root from './src/view/Root.js'
+import Navigation from './src/config/entry.js'
 export default function App() {
     return (
-        <Root/>
+        <Navigation/>
     );
 
 }

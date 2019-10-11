@@ -8,6 +8,7 @@ import {
     Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; //引入图标
+import NavigationBar from '../../components/SimpleNavigationBar';
 const {width, height} = Dimensions.get('window');
 import px2dp from '../../utils/px2dp';
 import Button from '../../components/Button';
@@ -43,6 +44,7 @@ export default class Login extends Component<props> {
     render() {
         return (
             <View style={styles.container}>
+                <NavigationBar title="登录" backOnPress={this._handleBack.bind(this)}/>
                 <View style={styles.editGroup}>
                     <View style={styles.editView1}>
                         <TextInput
@@ -87,8 +89,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e8e8e8',
-        justifyContent:'center',
-        alignContent:'center'
     },
     styleLine: {
         height: 1 / PixelRatio.get(),

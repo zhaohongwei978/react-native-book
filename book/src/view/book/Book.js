@@ -22,9 +22,9 @@ export default class Book extends Component<props> {
             <View style={styles.container}>
                 <ScrollableTabView
                     renderTabBar={() => <ScrollableTabBar />}
-                    tabBarBackgroundColor="rgb(22,131,251)"
+                    tabBarBackgroundColor="rgb(240, 185, 11)"
                     tabBarActiveTextColor="white"
-                    tabBarInactiveTextColor="rgba(255,255,255,0.5)"
+                    tabBarInactiveTextColor="rgb(240, 185, 11，0.5)"
                     tabBarTextStyle={{fontSize: theme.scrollView.fontSize}}
                     tabBarUnderlineStyle={theme.scrollView.underlineStyle}>
                     {this.state.tabNames.map((item, i) => {
